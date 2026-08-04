@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-otel-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: springboot-otel-demo
+  template:
+    metadata:
+      labels:
+        app: springboot-otel-demo
+    spec:
+      containers:
+        - name: app
+          image: {{.Values.image}}
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              memory: 768Mi
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 45
+            periodSeconds: 10
