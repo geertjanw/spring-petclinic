@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: springboot-otel-demo
+  name: spring-petclinic
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: springboot-otel-demo
+      app: spring-petclinic
   template:
     metadata:
       labels:
-        app: springboot-otel-demo
+        app: spring-petclinic
     spec:
       containers:
         - name: app
